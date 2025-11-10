@@ -7,16 +7,16 @@
   <meta name="description" content="S3 Sammy - Montreal-based automotive photographer specializing in Audi, performance, and night shoots." />
   <style>
     :root {
-      --bg-dark: #050608;
-      --bg-elevated: #0d0f12;
-      --accent-green: #163725; /* District green inspired */
-      --accent-soft: #1f4730;
-      --text-main: #f5f5f5;
-      --text-muted: #9da3af;
-      --border-subtle: rgba(255,255,255,0.06);
+      --bg-dark: #050708;
+      --bg-elevated: #0b1014;
+      --accent-green: #2ba36a;  /* brighter district green-inspired */
+      --accent-soft: #1f734a;
+      --text-main: #f9fafb;
+      --text-muted: #c5ccd5;
+      --border-subtle: rgba(255,255,255,0.14);
       --radius-xl: 18px;
       --transition-fast: 0.25s ease;
-      --shadow-soft: 0 14px 40px rgba(0,0,0,0.55);
+      --shadow-soft: 0 18px 55px rgba(0,0,0,0.7);
       --font-main: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
     }
 
@@ -47,9 +47,11 @@
       left: 0;
       right: 0;
       z-index: 60;
-      backdrop-filter: blur(16px);
-      background: radial-gradient(circle at top left, rgba(22,55,37,0.28), rgba(5,6,8,0.98));
-      border-bottom: 1px solid var(--border-subtle);
+      backdrop-filter: blur(18px);
+      background:
+        linear-gradient(to right, rgba(5,7,8,0.98), rgba(10,16,14,0.94))
+        ;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
     }
 
     .nav-wrap {
@@ -71,7 +73,7 @@
 
     .logo span.main {
       font-size: 18px;
-      font-weight: 700;
+      font-weight: 800;
       letter-spacing: 0.16em;
       color: var(--accent-green);
       text-transform: uppercase;
@@ -122,7 +124,7 @@
 
     .nav-cta:hover {
       background: var(--accent-green);
-      color: #ffffff;
+      color: #000;
       box-shadow: var(--shadow-soft);
       transform: translateY(-1px);
     }
@@ -134,26 +136,27 @@
       max-width: 1200px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: minmax(0, 3fr) minmax(220px, 2fr);
-      gap: 26px;
+      grid-template-columns: minmax(0, 2.6fr) minmax(260px, 2.4fr);
+      gap: 32px;
       align-items: center;
       position: relative;
     }
 
     .intro-title {
-      font-size: clamp(40px, 8vw, 70px);
-      font-weight: 800;
-      letter-spacing: 0.16em;
+      font-size: clamp(42px, 8vw, 72px);
+      font-weight: 900;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--accent-green);
-      line-height: 1.05;
-      margin-bottom: 10px;
+      line-height: 1.02;
+      margin-bottom: 14px;
+      text-shadow: 0 10px 40px rgba(0,0,0,0.9);
     }
 
     .intro-sub {
-      font-size: 13px;
+      font-size: 14px;
       color: var(--text-muted);
-      max-width: 360px;
+      max-width: 420px;
       margin-bottom: 24px;
     }
 
@@ -165,8 +168,9 @@
       border-radius: 999px;
       border: none;
       background: linear-gradient(135deg, var(--accent-green), var(--accent-soft));
-      color: #ffffff;
+      color: #050708;
       font-size: 11px;
+      font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.2em;
       cursor: pointer;
@@ -175,13 +179,13 @@
     }
 
     .btn-drive span.arrow {
-      font-size: 13px;
+      font-size: 14px;
       transform: translateY(1px);
     }
 
     .btn-drive:hover {
       transform: translateY(-3px);
-      box-shadow: 0 22px 60px rgba(0,0,0,0.9);
+      box-shadow: 0 26px 70px rgba(0,0,0,0.9);
     }
 
     .intro-note {
@@ -190,53 +194,54 @@
       margin-top: 12px;
       text-transform: uppercase;
       letter-spacing: 0.16em;
-      opacity: 0.75;
+      opacity: 0.9;
     }
 
     .intro-visual {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 16px;
+      gap: 10px;
+      position: relative;
     }
 
-    /* Pill container around hero car */
+    /* BIG floating hero car (no border) */
     .car-top-wrap {
-      width: 180px;
-      height: 260px;
-      border-radius: 999px;
-      border: 1px solid var(--border-subtle);
-      background:
-        radial-gradient(circle at top, rgba(22,55,37,0.24), transparent),
-        var(--bg-elevated);
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: var(--shadow-soft);
+      width: min(80vw, 420px);
+      height: auto;
+      background: transparent;
+      border: none;
+      box-shadow: none;
       position: relative;
-      overflow: hidden;
+      pointer-events: none;
     }
 
-    /* Floating hero car wrapper (driven by JS offset) */
     .car-float {
-      --drive-offset: 0px;
+      --drive-offset: 0px; /* updated by JS */
       animation: floatCar 3.5s ease-in-out infinite alternate;
+      transform-origin: center;
     }
 
-    /* Actual hero car image */
     .car-top-wrap img {
-      width: 120px;
+      width: 100%;
+      max-width: 400px;
       height: auto;
       object-fit: contain;
-      filter: drop-shadow(0 10px 25px rgba(0,0,0,0.9));
+      filter:
+        drop-shadow(0 26px 80px rgba(0,0,0,0.95))
+        saturate(1.05)
+        contrast(1.08);
     }
 
     @keyframes floatCar {
       from {
-        transform: translate(var(--drive-offset), -4px);
+        transform: translate(var(--drive-offset), -6px);
       }
       to {
-        transform: translate(var(--drive-offset), 4px);
+        transform: translate(var(--drive-offset), 6px);
       }
     }
 
@@ -253,7 +258,7 @@
       top: 80px;
       right: 26px;
       bottom: 40px;
-      width: 34px;
+      width: 36px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -263,9 +268,9 @@
 
     .scroll-line {
       position: relative;
-      width: 2px;
+      width: 3px;
       height: 100%;
-      background: rgba(255,255,255,0.06);
+      background: rgba(255,255,255,0.08);
       border-radius: 999px;
     }
 
@@ -276,18 +281,18 @@
       background: var(--accent-green);
       border-radius: 999px;
       height: 0;
-      opacity: 0.9;
+      box-shadow: 0 0 18px rgba(43,163,106,0.7);
     }
 
     .scroll-car {
       position: absolute;
-      width: 18px;
-      height: 30px;
+      width: 20px;
+      height: 32px;
       left: 50%;
       transform: translate(-50%, 0);
-      border-radius: 9px;
+      border-radius: 10px;
       background: var(--accent-green);
-      box-shadow: 0 6px 16px rgba(0,0,0,0.9);
+      box-shadow: 0 8px 18px rgba(0,0,0,0.9);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -296,10 +301,10 @@
     .scroll-car::before {
       content: "";
       width: 8px;
-      height: 14px;
-      background: #050608;
+      height: 15px;
+      background: #050708;
       border-radius: 5px;
-      opacity: 0.9;
+      opacity: 0.94;
     }
 
     /* MAIN CONTENT */
@@ -325,14 +330,15 @@
 
     .section-title {
       font-size: 26px;
-      font-weight: 500;
+      font-weight: 600;
       margin-bottom: 10px;
+      color: var(--text-main);
     }
 
     .section-sub {
       font-size: 14px;
       color: var(--text-muted);
-      max-width: 540px;
+      max-width: 620px;
       margin-bottom: 26px;
     }
 
@@ -359,19 +365,19 @@
     .tag {
       padding: 5px 11px;
       border-radius: 999px;
-      border: 1px solid var(--border-subtle);
+      border: 1px solid rgba(255,255,255,0.16);
       font-size: 10px;
-      color: var(--text-muted);
+      color: var(--text-main);
+      background: rgba(5,7,8,0.96);
       backdrop-filter: blur(12px);
-      background: rgba(8,10,12,0.9);
     }
 
     .hero-card {
       position: relative;
       padding: 16px;
       border-radius: var(--radius-xl);
-      background: radial-gradient(circle at top, rgba(22,55,37,0.16), var(--bg-elevated));
-      border: 1px solid var(--border-subtle);
+      background: radial-gradient(circle at top, rgba(43,163,106,0.06), var(--bg-elevated));
+      border: 1px solid rgba(255,255,255,0.08);
       box-shadow: var(--shadow-soft);
       overflow: hidden;
     }
@@ -408,11 +414,11 @@
     .hero-img {
       margin-top: 4px;
       border-radius: 14px;
-      border: 1px solid rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.04);
       min-height: 150px;
       background:
-        radial-gradient(circle at top, rgba(22,55,37,0.22), transparent),
-        url("img/s3sammy-hero.jpg") center/cover no-repeat; /* placeholder */
+        radial-gradient(circle at top, rgba(43,163,106,0.12), transparent),
+        url("img/s3sammy-hero.jpg") center/cover no-repeat;
     }
 
     .floating-orbit {
@@ -422,9 +428,9 @@
       width: 120px;
       height: 120px;
       border-radius: 999px;
-      border: 1px solid rgba(22,55,37,0.4);
-      box-shadow: 0 0 26px rgba(22,55,37,0.56);
-      opacity: 0.32;
+      border: 1px solid rgba(43,163,106,0.36);
+      box-shadow: 0 0 26px rgba(43,163,106,0.4);
+      opacity: 0.26;
       animation: floatOrbit 7s infinite ease-in-out alternate;
     }
 
@@ -444,8 +450,8 @@
       position: relative;
       border-radius: 14px;
       overflow: hidden;
-      background: #111;
-      border: 1px solid rgba(255,255,255,0.03);
+      background: #101318;
+      border: 1px solid rgba(255,255,255,0.06);
       min-height: 150px;
       cursor: pointer;
       transition: all var(--transition-fast);
@@ -456,14 +462,14 @@
       height: 100%;
       object-fit: cover;
       display: block;
-      filter: saturate(1.05) contrast(1.02);
+      filter: saturate(1.06) contrast(1.05);
       transition: all var(--transition-fast);
     }
 
     .shot-overlay {
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at bottom, rgba(5,6,8,0.0), rgba(0,0,0,0.85));
+      background: radial-gradient(circle at bottom, rgba(5,6,8,0), rgba(0,0,0,0.9));
       opacity: 0;
       display: flex;
       align-items: flex-end;
@@ -479,8 +485,8 @@
       padding: 2px 7px;
       font-size: 8px;
       border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.16);
-      background: rgba(5,6,8,0.9);
+      border: 1px solid rgba(255,255,255,0.2);
+      background: rgba(5,7,8,0.98);
       color: var(--accent-green);
       text-transform: uppercase;
       letter-spacing: 0.12em;
@@ -488,13 +494,13 @@
 
     .shot:hover {
       transform: translateY(-5px);
-      box-shadow: 0 18px 50px rgba(0,0,0,0.9);
+      box-shadow: 0 18px 50px rgba(0,0,0,0.95);
       border-color: var(--accent-green);
     }
 
     .shot:hover img {
-      transform: scale(1.05);
-      filter: saturate(1.12) contrast(1.08) brightness(1.02);
+      transform: scale(1.06);
+      filter: saturate(1.14) contrast(1.08) brightness(1.02);
     }
 
     .shot:hover .shot-overlay {
@@ -513,7 +519,7 @@
       padding: 18px 16px 16px;
       border-radius: var(--radius-xl);
       background: var(--bg-elevated);
-      border: 1px solid var(--border-subtle);
+      border: 1px solid rgba(255,255,255,0.08);
       box-shadow: var(--shadow-soft);
       transition: all var(--transition-fast);
       position: relative;
@@ -522,7 +528,7 @@
     .price-card:hover {
       transform: translateY(-5px);
       border-color: var(--accent-green);
-      box-shadow: 0 22px 60px rgba(0,0,0,0.9);
+      box-shadow: 0 24px 70px rgba(0,0,0,0.95);
     }
 
     .price-label {
@@ -536,6 +542,7 @@
     .price-name {
       font-size: 16px;
       margin-bottom: 6px;
+      color: var(--text-main);
     }
 
     .price-amount {
@@ -595,7 +602,7 @@
       padding: 16px;
       border-radius: var(--radius-xl);
       background: var(--bg-elevated);
-      border: 1px solid var(--border-subtle);
+      border: 1px solid rgba(255,255,255,0.08);
       box-shadow: var(--shadow-soft);
       font-size: 12px;
       color: var(--text-muted);
@@ -624,8 +631,8 @@
       width: 100%;
       padding: 8px 9px;
       border-radius: 10px;
-      border: 1px solid rgba(255,255,255,0.08);
-      background: #050608;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: #050708;
       color: var(--text-main);
       font-family: inherit;
       font-size: 11px;
@@ -636,7 +643,7 @@
     input:focus,
     textarea:focus {
       border-color: var(--accent-green);
-      box-shadow: 0 0 18px rgba(22,55,37,0.35);
+      box-shadow: 0 0 18px rgba(43,163,106,0.45);
     }
 
     textarea {
@@ -660,12 +667,12 @@
       display: flex;
       justify-content: space-between;
       gap: 10px;
-      border-top: 1px solid rgba(255,255,255,0.04);
+      border-top: 1px solid rgba(255,255,255,0.06);
     }
 
     footer a {
       color: var(--accent-green);
-      opacity: 0.85;
+      opacity: 0.9;
     }
 
     /* RESPONSIVE */
@@ -732,22 +739,21 @@
   <div>
     <h1 class="intro-title">S3 SAMMY</h1>
     <p class="intro-sub">
-      Dark, cinematic, district green–inspired automotive photography.
-      Hit “Let’s Drive” and roll through the work, rates & booking.
+      Dark, cinematic, district green–inspired automotive photography with clean, sharp visuals that stand out on any feed.
     </p>
     <button class="btn-drive" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">
       LET'S DRIVE
       <span class="arrow">↧</span>
     </button>
     <div class="intro-note">
-      Follow the S3 down the line as you scroll.
+      Follow the line on the right — the S3 moves with your scroll.
     </div>
   </div>
   <div class="intro-visual">
     <div class="car-top-wrap">
       <div class="car-float">
         <!-- Uses s3-top.png from repo root -->
-        <img src="img/s3-top.png" alt="Audi S3 District Green by S3 Sammy" />
+        <img src="s3-top.png" alt="Audi S3 District Green by S3 Sammy" />
       </div>
     </div>
     <div class="intro-label">Audi S3 · District Green · Montreal</div>
@@ -763,12 +769,12 @@
       <div>
         <p class="hero-text">
           S3 Sammy captures performance cars with a moody, OEM+ aesthetic:
-          sharp lines, deep shadows, and refined green tones inspired by the Audi S3 District Green.
-          Built for enthusiasts who want their car to look like a poster, not a parking lot snapshot.
+          sharp lines, clean reflections, and subtle green tones inspired by Audi’s District Green.
+          Built for enthusiasts who want their car to look like a campaign, not a snapshot.
         </p>
         <div class="hero-tags">
           <div class="tag">Night & Tunnel Shoots</div>
-          <div class="tag">Garage & Rooftop</div>
+          <div class="tag">Garage & Rooftop Sets</div>
           <div class="tag">Rolling Shots</div>
           <div class="tag">Social & Print Ready</div>
         </div>
@@ -778,11 +784,11 @@
         <div class="hero-car-label">Signature Look</div>
         <div class="hero-location">Montreal · Greater Montreal Area</div>
         <div class="hero-main-text">
-          Clean edits, rich contrast, dark environments and subtle green hues that highlight the car’s character.
+          Dark, controlled, and intentional framing that highlights your build without losing detail.
         </div>
         <div class="hero-mini">
-          <div>Ideal for Instagram, banners, posters & sale listings.</div>
-          <div>Available for solo cars, crews, shops & brands.</div>
+          <div>Perfect for Instagram, banners, and marketplace listings.</div>
+          <div>Available for solo cars, groups, shops, and brand collabs.</div>
         </div>
         <div class="hero-img"></div>
       </div>
@@ -794,50 +800,50 @@
     <div class="section-label">Selected Work</div>
     <h2 class="section-title">Portfolio</h2>
     <p class="section-sub">
-      Replace these placeholders with shots from <strong>@s3.sammy</strong>:
-      rolling shots, parking garages, tunnels, meets, and detail work that match the S3 Sammy look.
+      Swap these placeholders with real sets from <strong>@s3.sammy</strong>:
+      tunnels, rooftops, garages, meets, rolling shots, and detail work in his signature mood.
     </p>
     <div class="portfolio-grid">
       <div class="shot">
         <img src="img/s3sammy-1.jpg" alt="Audi S3 night tunnel" />
         <div class="shot-overlay">
           <span class="shot-tag">Night</span>
-          Tunnel set · Hard contrast · Clean stance
+          Tunnel · High contrast · Clean stance
         </div>
       </div>
       <div class="shot">
         <img src="img/s3sammy-2.jpg" alt="Rolling Audi S3" />
         <div class="shot-overlay">
           <span class="shot-tag">Rolling</span>
-          Motion blur · Street run
+          Street run · Motion blur
         </div>
       </div>
       <div class="shot">
         <img src="img/s3sammy-3.jpg" alt="Garage shoot" />
         <div class="shot-overlay">
           <span class="shot-tag">Garage</span>
-          Low light · Green tone
+          Low light · Green cast
         </div>
       </div>
       <div class="shot">
         <img src="img/s3sammy-4.jpg" alt="Detail shot" />
         <div class="shot-overlay">
           <span class="shot-tag">Details</span>
-          Badges · Wheels · Interior
+          Badges · Wheels · Lines
         </div>
       </div>
       <div class="shot">
         <img src="img/s3sammy-5.jpg" alt="Crew lineup" />
         <div class="shot-overlay">
           <span class="shot-tag">Crew</span>
-          Meet coverage · Euro lineup
+          Euro lineup · Meet vibes
         </div>
       </div>
       <div class="shot">
         <img src="img/s3sammy-6.jpg" alt="Rear lights" />
         <div class="shot-overlay">
           <span class="shot-tag">Moody</span>
-          Taillights · Wet pavement
+          Tails · Wet pavement
         </div>
       </div>
     </div>
@@ -848,18 +854,18 @@
     <div class="section-label">Rates</div>
     <h2 class="section-title">Packages</h2>
     <p class="section-sub">
-      Simple packages for enthusiasts & brands.
-      Adjust numbers anytime as demand grows.
+      Straightforward options for enthusiasts, clubs, and brands.
+      Numbers are flexible — adjust as demand grows.
     </p>
     <div class="pricing-grid">
       <div class="price-card">
         <div class="price-label">Entry</div>
         <div class="price-name">Street Session</div>
         <div class="price-amount">$120</div>
-        <div class="price-sub">Perfect for a clean update to your feed.</div>
+        <div class="price-sub">Clean, fast, perfect for socials.</div>
         <ul class="price-list">
           <li>Up to 30 minutes</li>
-          <li>1 location (street / lot / garage)</li>
+          <li>1 location</li>
           <li>8 fully edited photos</li>
           <li>3–5 day delivery</li>
         </ul>
@@ -870,7 +876,7 @@
         <div class="price-label">Signature</div>
         <div class="price-name">Full Feature Shoot</div>
         <div class="price-amount">$220</div>
-        <div class="price-sub">Every angle, rolling shots & detail work.</div>
+        <div class="price-sub">Show off every angle.</div>
         <ul class="price-list">
           <li>60–75 minutes</li>
           <li>2–3 locations</li>
@@ -884,13 +890,13 @@
         <div class="price-label">Premium</div>
         <div class="price-name">Crew / Brand / Event</div>
         <div class="price-amount">From $350</div>
-        <div class="price-sub">For shops, brands & multi-car shoots.</div>
+        <div class="price-sub">For shops, crews & launches.</div>
         <ul class="price-list">
           <li>Custom duration & locations</li>
           <li>Multi-car & group coverage</li>
           <li>30+ edited images</li>
           <li>Licensing for brands</li>
-          <li>Reels / video add-ons available</li>
+          <li>Reels / video add-ons</li>
         </ul>
       </div>
     </div>
@@ -901,7 +907,7 @@
     <div class="section-label">Book a Shoot</div>
     <h2 class="section-title">Contact</h2>
     <p class="section-sub">
-      Drop your details and shoot idea — you’ll get a reply with availability & a plan.
+      Share your car, location, and vibe — get a fast reply with availability and a game plan.
     </p>
 
     <div class="contact-wrap">
@@ -921,7 +927,7 @@
           <a href="https://www.instagram.com/s3.sammy" target="_blank">@s3.sammy</a>
         </p>
         <p class="contact-note">
-          A small deposit or confirmation may be required to secure your shoot.
+          A small deposit / confirmation may be required to lock in your date.
         </p>
       </div>
 
@@ -944,11 +950,11 @@
         </div>
         <div>
           <label for="details">Shoot idea</label>
-          <textarea id="details" name="Details" placeholder="Tell Sammy your vibe, locations & timing."></textarea>
+          <textarea id="details" name="Details" placeholder="Tell Sammy your preferred vibe, locations & timing."></textarea>
         </div>
         <button type="submit" class="btn-drive">Send Inquiry <span class="arrow">↗</span></button>
         <div class="contact-note">
-          You can later swap this mailto setup for Formspree or a backend for smoother submissions.
+          You can later replace this mailto with a proper form backend for a smoother UX.
         </div>
       </form>
     </div>
@@ -964,7 +970,10 @@
   // Year
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  // Car scroll animation (right-side track + hero car drive)
+  // Scroll-linked animations:
+  // - Right-side line fill
+  // - Right-side mini car
+  // - Hero car drive (same scroll progress so it's "linked" to the line)
   const scrollCar = document.getElementById('scrollCar');
   const scrollLineFill = document.getElementById('scrollLineFill');
   const carFloat = document.querySelector('.car-float');
@@ -973,12 +982,11 @@
     const doc = document.documentElement;
     const scrollTop = window.scrollY || doc.scrollTop;
     const scrollHeight = doc.scrollHeight - window.innerHeight;
-
     if (scrollHeight <= 0) return;
 
     const progress = Math.min(Math.max(scrollTop / scrollHeight, 0), 1);
 
-    // Right-side vertical car + fill
+    // Right-side vertical car + line fill
     if (scrollCar && scrollLineFill) {
       const line = scrollCar.parentElement;
       const lineHeight = line.offsetHeight;
@@ -989,9 +997,9 @@
       scrollLineFill.style.height = (progress * 100) + '%';
     }
 
-    // Hero car “drive” — slight horizontal movement
+    // Hero car: drive horizontally using same progress (visually "linked" to track)
     if (carFloat) {
-      const driveOffset = progress * 28; // tweak for more/less drive
+      const driveOffset = progress * 60; // increase/decrease for more/less drive
       carFloat.style.setProperty('--drive-offset', driveOffset + 'px');
     }
   }
