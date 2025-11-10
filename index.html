@@ -200,6 +200,7 @@
       gap: 16px;
     }
 
+    /* Pill container around hero car */
     .car-top-wrap {
       width: 180px;
       height: 260px;
@@ -216,6 +217,13 @@
       overflow: hidden;
     }
 
+    /* Floating hero car wrapper (driven by JS offset) */
+    .car-float {
+      --drive-offset: 0px;
+      animation: floatCar 3.5s ease-in-out infinite alternate;
+    }
+
+    /* Actual hero car image */
     .car-top-wrap img {
       width: 120px;
       height: auto;
@@ -223,33 +231,13 @@
       filter: drop-shadow(0 10px 25px rgba(0,0,0,0.9));
     }
 
-    .car-top-fallback {
-      width: 80px;
-      height: 150px;
-      border-radius: 40px;
-      background: var(--accent-green);
-      position: relative;
-      box-shadow: 0 18px 40px rgba(0,0,0,0.9);
-    }
-
-    .car-top-fallback::before,
-    .car-top-fallback::after {
-      content: "";
-      position: absolute;
-      left: 10px;
-      right: 10px;
-      height: 8px;
-      border-radius: 999px;
-      background: #050608;
-      opacity: 0.9;
-    }
-
-    .car-top-fallback::before {
-      top: 20px;
-    }
-
-    .car-top-fallback::after {
-      bottom: 20px;
+    @keyframes floatCar {
+      from {
+        transform: translate(var(--drive-offset), -4px);
+      }
+      to {
+        transform: translate(var(--drive-offset), 4px);
+      }
     }
 
     .intro-label {
@@ -279,7 +267,6 @@
       height: 100%;
       background: rgba(255,255,255,0.06);
       border-radius: 999px;
-      overflow: visible;
     }
 
     .scroll-line-fill {
@@ -349,7 +336,7 @@
       margin-bottom: 26px;
     }
 
-    /* ABOUT / HERO CONTENT (OLD HERO REPURPOSED) */
+    /* ABOUT / HERO DETAILS */
     .hero-details {
       display: grid;
       grid-template-columns: minmax(0, 3fr) minmax(260px, 2.5fr);
@@ -425,8 +412,7 @@
       min-height: 150px;
       background:
         radial-gradient(circle at top, rgba(22,55,37,0.22), transparent),
-        url("img/s3sammy-hero.jpg") center/cover no-repeat;
-      /* Replace with his real shot */
+        url("img/s3sammy-hero.jpg") center/cover no-repeat; /* placeholder */
     }
 
     .floating-orbit {
@@ -692,7 +678,6 @@
     @media (max-width: 768px) {
       .intro-hero {
         grid-template-columns: 1fr;
-        text-align: left;
       }
 
       nav ul {
@@ -748,7 +733,7 @@
     <h1 class="intro-title">S3 SAMMY</h1>
     <p class="intro-sub">
       Dark, cinematic, district green–inspired automotive photography.
-      Scroll to drive through the work, rates & booking.
+      Hit “Let’s Drive” and roll through the work, rates & booking.
     </p>
     <button class="btn-drive" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">
       LET'S DRIVE
@@ -760,9 +745,10 @@
   </div>
   <div class="intro-visual">
     <div class="car-top-wrap">
-      <!-- Use your own top-view Audi S3 image -->
-      <!-- <img src="img/s3-top.png" alt="Audi S3 top view" /> -->
-      <div class="car-top-fallback"></div>
+      <div class="car-float">
+        <!-- Uses s3-top.png from repo root -->
+        <img src="s3-top.png" alt="Audi S3 District Green by S3 Sammy" />
+      </div>
     </div>
     <div class="intro-label">Audi S3 · District Green · Montreal</div>
   </div>
@@ -777,7 +763,7 @@
       <div>
         <p class="hero-text">
           S3 Sammy captures performance cars with a moody, OEM+ aesthetic:
-          sharp lines, deep shadows, refined green tones inspired by the Audi S3 District Green.
+          sharp lines, deep shadows, and refined green tones inspired by the Audi S3 District Green.
           Built for enthusiasts who want their car to look like a poster, not a parking lot snapshot.
         </p>
         <div class="hero-tags">
@@ -962,7 +948,7 @@
         </div>
         <button type="submit" class="btn-drive">Send Inquiry <span class="arrow">↗</span></button>
         <div class="contact-note">
-          Swap this mailto setup for Formspree / backend later for a smoother experience.
+          You can later swap this mailto setup for Formspree or a backend for smoother submissions.
         </div>
       </form>
     </div>
@@ -978,9 +964,10 @@
   // Year
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  // Car scroll animation
+  // Car scroll animation (right-side track + hero car drive)
   const scrollCar = document.getElementById('scrollCar');
   const scrollLineFill = document.getElementById('scrollLineFill');
+  const carFloat = document.querySelector('.car-float');
 
   function updateCarPosition() {
     const doc = document.documentElement;
@@ -991,14 +978,22 @@
 
     const progress = Math.min(Math.max(scrollTop / scrollHeight, 0), 1);
 
-    const line = scrollCar.parentElement; // .scroll-line
-    const lineHeight = line.offsetHeight;
-    const carHeight = scrollCar.offsetHeight;
+    // Right-side vertical car + fill
+    if (scrollCar && scrollLineFill) {
+      const line = scrollCar.parentElement;
+      const lineHeight = line.offsetHeight;
+      const carHeight = scrollCar.offsetHeight;
+      const y = (lineHeight - carHeight) * progress;
 
-    const y = (lineHeight - carHeight) * progress;
+      scrollCar.style.top = y + 'px';
+      scrollLineFill.style.height = (progress * 100) + '%';
+    }
 
-    scrollCar.style.top = y + 'px';
-    scrollLineFill.style.height = (progress * 100) + '%';
+    // Hero car “drive” — slight horizontal movement
+    if (carFloat) {
+      const driveOffset = progress * 28; // tweak for more/less drive
+      carFloat.style.setProperty('--drive-offset', driveOffset + 'px');
+    }
   }
 
   window.addEventListener('scroll', updateCarPosition);
