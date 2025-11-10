@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>S3 Sammy | Automotive Photography</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="S3 Sammy - Montreal-based automotive photographer specializing in Audi, performance, and night shoots." />
+  <style>
+    :root {
+      --bg-dark: #050608;
+      --bg-elevated: #0d0f12;
+      --accent-green: #163725; /* Approx Audi District Green vibe (LX6M) :contentReference[oaicite:0]{index=0} */
+      --accent-soft: #1f4730;
+      --text-main: #f5f5f5;
+      --text-muted: #9da3af;
+      --border-subtle: rgba(255,255,255,0.06);
+      --radius-xl: 18px;
+      --transition-fast: 0.25s ease;
+      --shadow-soft: 0 14px 40px rgba(0,0,0,0.55);
+      --font-main: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", -sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-main);
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      line-height: 1.6;
+      scroll-behavior: smooth;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* NAV */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      backdrop-filter: blur(16px);
+      background: radial-gradient(circle at top left, rgba(22,55,37,0.30), rgba(5,6,8,0.96));
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .nav-wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 14px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: baseline;
+      gap: 7px;
+      letter-spacing: 0.18em;
+      font-size: 11px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .logo span.main {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-main);
+      letter-spacing: 0.12em;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 18px;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+    }
+
+    nav a {
+      padding-bottom: 4px;
+      border-bottom: 1px solid transparent;
+      transition: border-color var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
+      color: var(--text-muted);
+    }
+
+    nav a:hover {
+      color: var(--accent-green);
+      border-color: var(--accent-green);
+      transform: translateY(-1px);
+    }
+
+    .nav-cta {
+      padding: 7px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--accent-green);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--accent-green);
+      background: transparent;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+
+    .nav-cta:hover {
+      background: var(--accent-green);
+      color: #ffffff;
+      box-shadow: var(--shadow-soft);
+      transform: translateY(-1px);
+    }
+
+    /* LAYOUT */
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 110px 22px 70px 22px;
+    }
+
+    section {
+      margin-bottom: 90px;
+    }
+
+    .section-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--accent-green);
+      margin-bottom: 6px;
+    }
+
+    .section-title {
+      font-size: 26px;
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+
+    .section-sub {
+      font-size: 14px;
+      color: var(--text-muted);
+      max-width: 540px;
+      margin-bottom: 26px;
+    }
+
+    /* HERO */
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(260px, 2.5fr);
+      gap: 26px;
+      align-items: center;
+    }
+
+    .hero-title {
+      font-size: clamp(30px, 5vw, 40px);
+      font-weight: 500;
+      line-height: 1.15;
+      margin-bottom: 12px;
+    }
+
+    .hero-title span {
+      color: var(--accent-green);
+      font-weight: 600;
+    }
+
+    .hero-text {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .tag {
+      padding: 5px 11px;
+      border-radius: 999px;
+      border: 1px solid var(--border-subtle);
+      font-size: 10px;
+      color: var(--text-muted);
+      backdrop-filter: blur(12px);
+      background: rgba(8,10,12,0.9);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .btn-primary {
+      padding: 9px 19px;
+      border-radius: 999px;
+      border: none;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      background: linear-gradient(135deg, var(--accent-green), var(--accent-soft));
+      color: #ffffff;
+      cursor: pointer;
+      box-shadow: var(--shadow-soft);
+      transition: all var(--transition-fast);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+    }
+
+    .btn-ghost {
+      padding: 9px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--border-subtle);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+      background: transparent;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--accent-green);
+      color: var(--accent-green);
+      transform: translateY(-2px);
+    }
+
+    .hero-card {
+      position: relative;
+      padding: 16px;
+      border-radius: var(--radius-xl);
+      background: radial-gradient(circle at top, rgba(22,55,37,0.16), var(--bg-elevated));
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-soft);
+      overflow: hidden;
+    }
+
+    .hero-car-label {
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--accent-green);
+      margin-bottom: 3px;
+    }
+
+    .hero-location {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .hero-main-text {
+      font-size: 12px;
+      color: var(--text-main);
+      margin-bottom: 12px;
+    }
+
+    .hero-mini {
+      font-size: 9px;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .hero-img {
+      margin-top: 4px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.03);
+      min-height: 160px;
+      background:
+          radial-gradient(circle at top, rgba(22,55,37,0.22), transparent),
+          url("img/s3sammy-hero.jpg") center/cover no-repeat;
+      /* Replace with one of his Audi shots */
+    }
+
+    .floating-orbit {
+      position: absolute;
+      top: -40px;
+      right: -40px;
+      width: 120px;
+      height: 120px;
+      border-radius: 999px;
+      border: 1px solid rgba(22,55,37,0.4);
+      box-shadow: 0 0 26px rgba(22,55,37,0.56);
+      opacity: 0.32;
+      animation: floatOrbit 7s infinite ease-in-out alternate;
+    }
+
+    @keyframes floatOrbit {
+      0% { transform: translate(0,0) scale(1); }
+      100% { transform: translate(-14px,16px) scale(1.08); }
+    }
+
+    /* PRICING */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 18px;
+    }
+
+    .price-card {
+      padding: 18px 16px 16px;
+      border-radius: var(--radius-xl);
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-soft);
+      transition: all var(--transition-fast);
+      position: relative;
+    }
+
+    .price-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent-green);
+      box-shadow: 0 22px 60px rgba(0,0,0,0.9);
+    }
+
+    .price-label {
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--accent-green);
+      margin-bottom: 6px;
+    }
+
+    .price-name {
+      font-size: 16px;
+      margin-bottom: 6px;
+    }
+
+    .price-amount {
+      font-size: 18px;
+      font-weight: 500;
+      margin-bottom: 4px;
+      color: var(--accent-green);
+    }
+
+    .price-sub {
+      font-size: 10px;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    .price-list {
+      list-style: none;
+      font-size: 11px;
+      color: var(--text-main);
+    }
+
+    .price-list li {
+      margin-bottom: 4px;
+      display: flex;
+      gap: 6px;
+    }
+
+    .price-list li::before {
+      content: "▹";
+      color: var(--accent-green);
+      font-size: 9px;
+      margin-top: 2px;
+    }
+
+    .badge-popular {
+      position: absolute;
+      top: 9px;
+      right: 10px;
+      font-size: 8px;
+      padding: 2px 7px;
+      border-radius: 999px;
+      background: var(--accent-green);
+      color: #000;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+    }
+
+    /* PORTFOLIO */
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 10px;
+    }
+
+    .shot {
+      position: relative;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #111;
+      border: 1px solid rgba(255,255,255,0.03);
+      min-height: 150px;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+
+    .shot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: saturate(1.05) contrast(1.02);
+      transition: all var(--transition-fast);
+    }
+
+    .shot-overlay {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at bottom, rgba(5,6,8,0.0), rgba(0,0,0,0.85));
+      opacity: 0;
+      display: flex;
+      align-items: flex-end;
+      padding: 10px;
+      font-size: 9px;
+      color: var(--text-main);
+      gap: 4px;
+      transition: opacity var(--transition-fast), transform var(--transition-fast);
+      transform: translateY(8px);
+    }
+
+    .shot-tag {
+      padding: 2px 7px;
+      font-size: 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.16);
+      background: rgba(5,6,8,0.9);
+      color: var(--accent-green);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .shot:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 18px 50px rgba(0,0,0,0.9);
+      border-color: var(--accent-green);
+    }
+
+    .shot:hover img {
+      transform: scale(1.05);
+      filter: saturate(1.12) contrast(1.08) brightness(1.02);
+    }
+
+    .shot:hover .shot-overlay {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* CONTACT */
+    .contact-wrap {
+      display: grid;
+      grid-template-columns: minmax(0, 2.2fr) minmax(230px, 2fr);
+      gap: 22px;
+      align-items: flex-start;
+    }
+
+    .contact-card {
+      padding: 16px;
+      border-radius: var(--radius-xl);
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-soft);
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .contact-card strong {
+      color: var(--accent-green);
+      font-weight: 500;
+    }
+
+    form {
+      display: grid;
+      gap: 10px;
+      font-size: 11px;
+    }
+
+    label {
+      color: var(--text-muted);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 8px 9px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: #050608;
+      color: var(--text-main);
+      font-family: inherit;
+      font-size: 11px;
+      outline: none;
+      transition: all var(--transition-fast);
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: var(--accent-green);
+      box-shadow: 0 0 18px rgba(22,55,37,0.35);
+    }
+
+    textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    .contact-note {
+      font-size: 9px;
+      color: var(--text-muted);
+      margin-top: 3px;
+    }
+
+    /* FOOTER */
+    footer {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 22px 26px 22px;
+      font-size: 9px;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      border-top: 1px solid rgba(255,255,255,0.04);
+    }
+
+    footer a {
+      color: var(--accent-green);
+      opacity: 0.85;
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-wrap {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-wrap {
+        padding-inline: 14px;
+      }
+
+      nav ul {
+        display: none; /* keep it clean on mobile, rely on hero buttons */
+      }
+
+      .nav-cta {
+        font-size: 9px;
+        padding: 6px 11px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="nav-wrap">
+    <div class="logo">
+      <span class="main">S3 SAMMY</span>
+      <span>| Automotive Visuals</span>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#pricing">Rates</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <a href="#contact" class="nav-cta">Book a shoot</a>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section id="home">
+    <div class="hero">
+      <div>
+        <div class="section-label">Montreal · Automotive Photography</div>
+        <h1 class="hero-title">
+          Cinematic <span>Audi S3</span> & performance car photography with a district green mood.
+        </h1>
+        <p class="hero-text">
+          Night streets. Garage lights. Rolling shots. S3 Sammy turns real cars into poster moments with a dark, moody, OEM+ aesthetic.
+        </p>
+        <div class="hero-tags">
+          <div class="tag">Audi & Euro Focused</div>
+          <div class="tag">Night & Tunnel Shoots</div>
+          <div class="tag">Social Media Ready</div>
+          <div class="tag">Print Quality Edits</div>
+        </div>
+        <div class="hero-actions">
+          <a href="#pricing"><button class="btn-primary">View Packages</button></a>
+          <a href="#portfolio"><button class="btn-ghost">Browse Portfolio</button></a>
+        </div>
+      </div>
+      <div class="hero-card">
+        <div class="floating-orbit"></div>
+        <div class="hero-car-label">Audi S3 · District Green LX6M</div>
+        <div class="hero-location">Based in Montreal · Available in Greater Montreal & Surroundings</div>
+        <div class="hero-main-text">
+          Focused on sharp detail, clean edits, and an atmosphere that feels straight out of a manufacturer campaign.
+        </div>
+        <div class="hero-mini">
+          <div>
+            25+ full shoots<br/>across Montreal, garages, rooftops & tunnels.
+          </div>
+          <div>
+            Perfect for Instagram, prints, classifieds, and brand collabs.
+          </div>
+        </div>
+        <div class="hero-img"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTFOLIO -->
+  <section id="portfolio">
+    <div class="section-label">Selected Work</div>
+    <h2 class="section-title">Portfolio</h2>
+    <p class="section-sub">
+      A sample of S3 Sammy’s recent sets — Audi S3, Euros, and performance builds shot with a dark, cinematic, green-tinted style.
+      Replace the placeholders below with exports from <strong>@s3.sammy</strong>.
+    </p>
+    <div class="portfolio-grid">
+      <!-- Replace src values with actual image files (download from Instagram) -->
+      <div class="shot">
+        <img src="img/s3sammy-1.jpg" alt="Audi S3 District Green night shoot" />
+        <div class="shot-overlay">
+          <span class="shot-tag">Night Shoot</span>
+          Downtown tunnel · Audi S3
+        </div>
+      </div>
+      <div class="shot">
+        <img src="img/s3sammy-2.jpg" alt="Side profile Audi S3 rolling shot" />
+        <div class="shot-overlay">
+          <span class="shot-tag">Rolling</span>
+          Motion blur · Clean OEM stance
+        </div>
+      </div>
+      <div class="shot">
+        <img src="img/s3sammy-3.jpg" alt="Parking garage Audi S3 moody lighting" />
+        <div class="shot-overlay">
+          <span class="shot-tag">Garage</span>
+          Hard shadows · Green tones
+        </div>
+      </div>
+      <div class="shot">
+        <img src="img/s3sammy-4.jpg" alt="Detail shot of Audi S3" />
+        <div class="shot-overlay">
+          <span class="shot-tag">Details</span>
+          Badges · Wheels · Interior
+        </div>
+      </div>
+      <div class="shot">
+        <img src="img/s3sammy-5.jpg" alt="Euro lineup group shot" />
+        <div class="shot-overlay">
+          <span class="shot-tag">Meet</span>
+          Euro lineup · Night meet vibes
+        </div>
+      </div>
+      <div class="shot">
+        <img src="img/s3sammy-6.jpg" alt="Moody rear shot of car" />
+        <div class="shot-overlay">
+          <span class="shot-tag">Moody</span>
+          Tail lights · Wet pavement
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing">
+    <div class="section-label">Rates</div>
+    <h2 class="section-title">Packages</h2>
+    <p class="section-sub">
+      Straightforward pricing for enthusiasts, creators, and brands. All packages include high-end edits in S3 Sammy’s signature dark/green tone.
+      (You can tweak these numbers anytime.)
+    </p>
+
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="price-label">Entry</div>
+        <div class="price-name">Street Session</div>
+        <div class="price-amount">$120</div>
+        <div class="price-sub">Perfect for a quick update to your feed or listing.</div>
+        <ul class="price-list">
+          <li>Up to 30 minutes</li>
+          <li>1 location (street / lot / garage)</li>
+          <li>8 fully edited photos</li>
+          <li>Delivery within 3–5 days</li>
+        </ul>
+      </div>
+
+      <div class="price-card">
+        <div class="badge-popular">Most booked</div>
+        <div class="price-label">Signature</div>
+        <div class="price-name">Full Feature Shoot</div>
+        <div class="price-amount">$220</div>
+        <div class="price-sub">Show off every angle with a full cinematic set.</div>
+        <ul class="price-list">
+          <li>Up to 60–75 minutes</li>
+          <li>2–3 locations (streets, tunnel, garage)</li>
+          <li>18 fully edited photos</li>
+          <li>Social + print-ready exports</li>
+          <li>Rolling shots (where safe)</li>
+        </ul>
+      </div>
+
+      <div class="price-card">
+        <div class="price-label">Premium</div>
+        <div class="price-name">Crew / Brand / Event</div>
+        <div class="price-amount">From $350</div>
+        <div class="price-sub">For crews, shops, & brands needing full coverage.</div>
+        <ul class="price-list">
+          <li>Custom duration & locations</li>
+          <li>Multi-car & group shots</li>
+          <li>30+ edited images</li>
+          <li>Licensing for brands & shops</li>
+          <li>Optional rolling rig & reels add-ons</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-label">Book a Shoot</div>
+    <h2 class="section-title">Contact</h2>
+    <p class="section-sub">
+      Tell us about your car, preferred vibe, and location. You’ll get a response with availability and a custom plan.
+    </p>
+
+    <div class="contact-wrap">
+      <div class="contact-card">
+        <p>
+          <strong>Booking:</strong> Use the form or email
+          <a href="mailto:info@s3sammy.com">info@s3sammy.com</a> (update to his real email).
+        </p>
+        <p>
+          <strong>Location:</strong> Montreal & surrounding areas. Travel available upon request.
+        </p>
+        <p>
+          <strong>Turnaround:</strong> 3–7 days for most shoots. Rush delivery available.
+        </p>
+        <p>
+          <strong>Instagram:</strong>
+          <a href="https://www.instagram.com/s3.sammy" target="_blank">@s3.sammy</a>
+        </p>
+        <p class="contact-note">
+          A deposit or confirmation may be required to secure your date. Exact rates can be adjusted as his demand grows.
+        </p>
+      </div>
+
+      <form action="mailto:info@s3sammy.com" method="post" enctype="text/plain">
+        <div>
+          <label for="name">Name</label>
+          <input id="name" name="Name" type="text" placeholder="Your name" required />
+        </div>
+        <div>
+          <label for="email">Email</label>
+          <input id="email" name="Email" type="email" placeholder="you@example.com" required />
+        </div>
+        <div>
+          <label for="instagram">Instagram / Handle</label>
+          <input id="instagram" name="Instagram" type="text" placeholder="@yourhandle" />
+        </div>
+        <div>
+          <label for="car">Car & details</label>
+          <input id="car" name="Car" type="text" placeholder="Year · Make · Model · Color · Mods" required />
+        </div>
+        <div>
+          <label for="details">Shoot idea</label>
+          <textarea id="details" name="Details" placeholder="Tell Sammy your preferred vibe, locations, and timing."></textarea>
+        </div>
+        <button type="submit" class="btn-primary">Send Inquiry</button>
+        <div class="contact-note">
+          This form uses a simple <code>mailto:</code> setup. For a fully functional form with no email popup, connect it to a service like Formspree or a backend later.
+        </div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div>© <span id="year"></span> S3 Sammy. All rights reserved.</div>
+  <div>Site by CTRL & Create.</div>
+</footer>
+
+<script>
+  // Set year
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
