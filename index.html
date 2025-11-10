@@ -28,11 +28,18 @@
 
     body {
       font-family: var(--font-main);
-      background-color: var(--bg-dark);
       color: var(--text-main);
       line-height: 1.6;
       scroll-behavior: smooth;
       overflow-x: hidden;
+      background-color: var(--bg-dark);
+      background-image:
+        radial-gradient(circle at top left, rgba(43,163,106,0.10), transparent),
+        radial-gradient(circle at bottom right, rgba(43,163,106,0.04), transparent),
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: auto, auto, 90px 90px, 90px 90px;
+      background-position: 0 0, 100% 100%, 0 0, 0 0;
     }
 
     a {
@@ -48,9 +55,7 @@
       right: 0;
       z-index: 60;
       backdrop-filter: blur(18px);
-      background:
-        linear-gradient(to right, rgba(5,7,8,0.98), rgba(10,16,14,0.94))
-        ;
+      background: linear-gradient(to right, rgba(5,7,8,0.98), rgba(10,16,14,0.94));
       border-bottom: 1px solid rgba(255,255,255,0.06);
     }
 
@@ -64,16 +69,9 @@
       gap: 14px;
     }
 
-    nav a.active-link {
-  color: var(--accent-green);
-  border-color: var(--accent-green);
-}
-
-
     .logo {
       display: flex;
       flex-direction: column;
-      gap: 0;
       line-height: 1.1;
     }
 
@@ -112,6 +110,11 @@
       color: var(--accent-green);
       border-color: var(--accent-green);
       transform: translateY(-1px);
+    }
+
+    nav a.active-link {
+      color: var(--accent-green);
+      border-color: var(--accent-green);
     }
 
     .nav-cta {
@@ -163,7 +166,7 @@
       font-size: 14px;
       color: var(--text-muted);
       max-width: 420px;
-      margin-bottom: 24px;
+      margin-bottom: 18px;
     }
 
     .btn-drive {
@@ -197,20 +200,19 @@
     .intro-note {
       font-size: 9px;
       color: var(--text-muted);
-      margin-top: 12px;
+      margin-top: 10px;
       text-transform: uppercase;
       letter-spacing: 0.16em;
       opacity: 0.9;
     }
 
-   .intro-visual {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end; /* was center */
-  gap: 10px;
-  position: relative;
-}
-
+    .intro-visual {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end; /* push towards scroll line */
+      gap: 10px;
+      position: relative;
+    }
 
     /* BIG floating hero car (no border) */
     .car-top-wrap {
@@ -486,6 +488,7 @@
       gap: 4px;
       transition: opacity var(--transition-fast), transform var(--transition-fast);
       transform: translateY(8px);
+      pointer-events: none;
     }
 
     .shot-tag {
@@ -710,6 +713,10 @@
       .contact-wrap {
         grid-template-columns: 1fr;
       }
+
+      .intro-visual {
+        align-items: center;
+      }
     }
   </style>
 </head>
@@ -746,7 +753,7 @@
   <div>
     <h1 class="intro-title">S3 SAMMY</h1>
     <p class="intro-sub">
-      Dark, cinematic, district green–inspired automotive photography with clean, sharp visuals that stand out on any feed.
+      Dark, cinematic, district green–inspired automotive photography with sharp visuals that stand out on any feed.
     </p>
     <button class="btn-drive" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">
       LET'S DRIVE
@@ -755,12 +762,36 @@
     <div class="intro-note">
       Follow the line on the right — the S3 moves with your scroll.
     </div>
+    <div class="intro-note" style="margin-top:6px;">
+      <span style="
+        display:inline-flex;
+        align-items:center;
+        gap:6px;
+        padding:4px 9px;
+        border-radius:999px;
+        border:1px solid rgba(43,163,106,0.8);
+        font-size:8px;
+        letter-spacing:0.14em;
+        text-transform:uppercase;
+        color:var(--accent-green);
+        background:rgba(5,7,8,0.96);
+      ">
+        <span style="
+          width:7px;
+          height:7px;
+          border-radius:999px;
+          background:#2ba36a;
+          box-shadow:0 0 8px rgba(43,163,106,0.9);
+        "></span>
+        Available for bookings
+      </span>
+    </div>
   </div>
   <div class="intro-visual">
     <div class="car-top-wrap">
       <div class="car-float">
         <!-- Uses s3-top.png from repo root -->
-        <img src="img/s3-top.png" alt="Audi S3 District Green by S3 Sammy" />
+        <img src="s3-top.png" alt="Audi S3 District Green by S3 Sammy" />
       </div>
     </div>
     <div class="intro-label">Audi S3 · District Green · Montreal</div>
@@ -775,9 +806,9 @@
     <div class="hero-details">
       <div>
         <p class="hero-text">
-          S3 Sammy captures performance cars with a moody, OEM+ aesthetic:
+          S3 Sammy shoots performance cars with an OEM+ aesthetic:
           sharp lines, clean reflections, and subtle green tones inspired by Audi’s District Green.
-          Built for enthusiasts who want their car to look like a campaign, not a snapshot.
+          Built for enthusiasts who want their car to look like a campaign, not a random parkade snap.
         </p>
         <div class="hero-tags">
           <div class="tag">Night & Tunnel Shoots</div>
@@ -791,11 +822,11 @@
         <div class="hero-car-label">Signature Look</div>
         <div class="hero-location">Montreal · Greater Montreal Area</div>
         <div class="hero-main-text">
-          Dark, controlled, and intentional framing that highlights your build without losing detail.
+          Dark, controlled lighting that keeps detail in the paint, wheels, and bodylines — no muddy edits.
         </div>
         <div class="hero-mini">
           <div>Perfect for Instagram, banners, and marketplace listings.</div>
-          <div>Available for solo cars, groups, shops, and brand collabs.</div>
+          <div>Solo cars, groups, shops, and brand collabs welcome.</div>
         </div>
         <div class="hero-img"></div>
       </div>
@@ -807,8 +838,8 @@
     <div class="section-label">Selected Work</div>
     <h2 class="section-title">Portfolio</h2>
     <p class="section-sub">
-      Swap these placeholders with real sets from <strong>@s3.sammy</strong>:
-      tunnels, rooftops, garages, meets, rolling shots, and detail work in his signature mood.
+      Replace these placeholders with real sets from <strong>@s3.sammy</strong>:
+      tunnels, rooftops, garages, meets, rolling shots, and details in his signature mood.
     </p>
     <div class="portfolio-grid">
       <div class="shot">
@@ -862,7 +893,7 @@
     <h2 class="section-title">Packages</h2>
     <p class="section-sub">
       Straightforward options for enthusiasts, clubs, and brands.
-      Numbers are flexible — adjust as demand grows.
+      Adjust as demand grows — the structure stays clean.
     </p>
     <div class="pricing-grid">
       <div class="price-card">
@@ -883,7 +914,7 @@
         <div class="price-label">Signature</div>
         <div class="price-name">Full Feature Shoot</div>
         <div class="price-amount">$220</div>
-        <div class="price-sub">Show off every angle.</div>
+        <div class="price-sub">The full story of your car.</div>
         <ul class="price-list">
           <li>60–75 minutes</li>
           <li>2–3 locations</li>
@@ -914,7 +945,7 @@
     <div class="section-label">Book a Shoot</div>
     <h2 class="section-title">Contact</h2>
     <p class="section-sub">
-      Share your car, location, and vibe — get a fast reply with availability and a game plan.
+      Share your car, location, and vibe — get a fast reply with availability and a plan.
     </p>
 
     <div class="contact-wrap">
@@ -934,7 +965,7 @@
           <a href="https://www.instagram.com/s3.sammy" target="_blank">@s3.sammy</a>
         </p>
         <p class="contact-note">
-          A small deposit / confirmation may be required to lock in your date.
+          A small deposit or confirmation may be required to lock in your date.
         </p>
       </div>
 
@@ -961,7 +992,7 @@
         </div>
         <button type="submit" class="btn-drive">Send Inquiry <span class="arrow">↗</span></button>
         <div class="contact-note">
-          You can later replace this mailto with a proper form backend for a smoother UX.
+          You can swap this mailto for a proper form backend later for smoother submissions.
         </div>
       </form>
     </div>
@@ -973,17 +1004,53 @@
   <div>Site by CTRL & Create.</div>
 </footer>
 
+<!-- Lightbox for portfolio -->
+<div id="lightbox" style="
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.9);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 120;
+">
+  <img id="lightbox-img" src="" alt="" style="
+    max-width: 92vw;
+    max-height: 92vh;
+    box-shadow: 0 26px 80px rgba(0,0,0,1);
+    border-radius: 14px;
+  ">
+</div>
+
 <script>
   // Year
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  // Scroll-linked animations:
-  // - Right-side line fill
-  // - Right-side mini car
-  // - Hero car drive (same scroll progress so it's "linked" to the line)
   const scrollCar = document.getElementById('scrollCar');
   const scrollLineFill = document.getElementById('scrollLineFill');
   const carFloat = document.querySelector('.car-float');
+  const sections = document.querySelectorAll('section.content-block, .intro-hero');
+  const navLinks = document.querySelectorAll('nav a');
+
+  function updateActiveLink() {
+    let currentId = '';
+    sections.forEach(section => {
+      const rect = section.getBoundingClientRect();
+      if (rect.top <= 120 && rect.bottom >= 120) {
+        currentId = section.id || '';
+      }
+    });
+
+    navLinks.forEach(link => {
+      const href = link.getAttribute('href');
+      const targetId = href && href.startsWith('#') ? href.substring(1) : '';
+      if (currentId && targetId === currentId) {
+        link.classList.add('active-link');
+      } else {
+        link.classList.remove('active-link');
+      }
+    });
+  }
 
   function updateCarPosition() {
     const doc = document.documentElement;
@@ -1004,16 +1071,37 @@
       scrollLineFill.style.height = (progress * 100) + '%';
     }
 
-    // Hero car: drive horizontally using same progress (visually "linked" to track)
+    // Hero car: drive horizontally using same scroll progress
     if (carFloat) {
-      const driveOffset = progress * 60; // increase/decrease for more/less drive
+      const driveOffset = progress * 60; // adjust for more/less movement
       carFloat.style.setProperty('--drive-offset', driveOffset + 'px');
     }
+
+    updateActiveLink();
   }
+
+  // Simple portfolio lightbox
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+
+  document.querySelectorAll('.shot img').forEach(img => {
+    img.addEventListener('click', () => {
+      lightboxImg.src = img.src;
+      lightbox.style.display = 'flex';
+    });
+  });
+
+  lightbox.addEventListener('click', () => {
+    lightbox.style.display = 'none';
+    lightboxImg.src = '';
+  });
 
   window.addEventListener('scroll', updateCarPosition);
   window.addEventListener('resize', updateCarPosition);
-  window.addEventListener('load', updateCarPosition);
+  window.addEventListener('load', () => {
+    updateCarPosition();
+    updateActiveLink();
+  });
 </script>
 
 </body>
