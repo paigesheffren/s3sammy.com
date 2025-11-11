@@ -9,7 +9,7 @@
     :root {
       --bg-dark: #050708;
       --bg-elevated: #0b1014;
-      --accent-green: #2ba36a;  /* brighter district green-inspired */
+      --accent-green: #2ba36a;
       --accent-soft: #1f734a;
       --text-main: #f9fafb;
       --text-muted: #c5ccd5;
@@ -138,7 +138,7 @@
       transform: translateY(-1px);
     }
 
-    /* INTRO HERO */
+    /* HERO */
     .intro-hero {
       min-height: 100vh;
       padding: 90px 22px 40px 22px;
@@ -214,7 +214,6 @@
       position: relative;
     }
 
-    /* BIG floating hero car (no border) */
     .car-top-wrap {
       display: flex;
       align-items: center;
@@ -238,7 +237,7 @@
       width: 100%;
       max-width: 400px;
       height: auto;
-      object-fit: contain;
+      object-fit: cover;
       filter:
         drop-shadow(0 26px 80px rgba(0,0,0,0.95))
         saturate(1.05)
@@ -246,12 +245,8 @@
     }
 
     @keyframes floatCar {
-      from {
-        transform: translate(var(--drive-offset), -6px);
-      }
-      to {
-        transform: translate(var(--drive-offset), 6px);
-      }
+      from { transform: translate(var(--drive-offset), -6px); }
+      to   { transform: translate(var(--drive-offset), 6px); }
     }
 
     .intro-label {
@@ -325,9 +320,7 @@
       z-index: 10;
     }
 
-    section.content-block {
-      margin-bottom: 90px;
-    }
+    section.content-block { margin-bottom: 90px; }
 
     .section-label {
       font-size: 10px;
@@ -427,7 +420,7 @@
       min-height: 150px;
       background:
         radial-gradient(circle at top, rgba(43,163,106,0.12), transparent),
-        url("img/s3sammy-hero.jpg") center/cover no-repeat;
+        url("img/portfolio2.jpg") center/cover no-repeat;
     }
 
     .floating-orbit {
@@ -461,7 +454,7 @@
       overflow: hidden;
       background: #101318;
       border: 1px solid rgba(255,255,255,0.06);
-      aspect-ratio: 16 / 9;           /* uniform frame for all images */
+      aspect-ratio: 16 / 9;
       cursor: pointer;
       transition: all var(--transition-fast);
     }
@@ -469,7 +462,7 @@
     .shot img {
       width: 100%;
       height: 100%;
-      object-fit: cover;               /* crops to fit cleanly */
+      object-fit: cover;
       display: block;
       filter: saturate(1.06) contrast(1.05);
       transition: all var(--transition-fast);
@@ -687,33 +680,24 @@
 
     /* RESPONSIVE */
     @media (max-width: 900px) {
-      .scroll-track {
-        display: none;
-      }
+      .scroll-track { display: none; }
     }
 
     @media (max-width: 768px) {
       .intro-hero {
         grid-template-columns: 1fr;
       }
-
-      nav ul {
-        display: none;
-      }
-
+      nav ul { display: none; }
       .nav-cta {
         font-size: 8px;
         padding: 5px 10px;
       }
-
       .hero-details {
         grid-template-columns: 1fr;
       }
-
       .contact-wrap {
         grid-template-columns: 1fr;
       }
-
       .intro-visual {
         align-items: center;
       }
@@ -788,7 +772,8 @@
   <div class="intro-visual">
     <div class="car-top-wrap">
       <div class="car-float">
-        <img src="s3-top.png" alt="Audi S3 District Green by S3 Sammy" />
+        <!-- Use first portfolio image as hero car -->
+        <img src="img/s3-top.png" alt="Audi S3 by S3 Sammy" />
       </div>
     </div>
     <div class="intro-label">Audi S3 · District Green · Montreal</div>
@@ -833,51 +818,56 @@
     <div class="section-label">Selected Work</div>
     <h2 class="section-title">Portfolio</h2>
     <p class="section-sub">
-      Replace these placeholders with real sets from <strong>@s3.sammy</strong>:
-      tunnels, rooftops, garages, meets, rolling shots, and details in his signature mood.
+      Real shots from S3 Sammy — each tile is cropped clean for a consistent, premium grid.
     </p>
     <div class="portfolio-grid">
       <div class="shot">
-        <img src="img/s3sammy-1.jpg" alt="Audi S3 night tunnel" />
-        <div class="shot-overlay">
-          <span class="shot-tag">Night</span>
-          Tunnel · High contrast · Clean stance
-        </div>
+        <img src="img/portfolio1.png" alt="Portfolio 1" />
+        <div class="shot-overlay"><span class="shot-tag">Set 01</span> Signature S3</div>
       </div>
       <div class="shot">
-        <img src="img/s3sammy-2.jpg" alt="Rolling Audi S3" />
-        <div class="shot-overlay">
-          <span class="shot-tag">Rolling</span>
-          Street run · Motion blur
-        </div>
+        <img src="img/portfolio2.png" alt="Portfolio 2" />
+        <div class="shot-overlay"><span class="shot-tag">Set 02</span> Night streets</div>
       </div>
       <div class="shot">
-        <img src="img/s3sammy-3.jpg" alt="Garage shoot" />
-        <div class="shot-overlay">
-          <span class="shot-tag">Garage</span>
-          Low light · Green cast
-        </div>
+        <img src="img/portfolio3.png" alt="Portfolio 3" />
+        <div class="shot-overlay"><span class="shot-tag">Set 03</span> Tunnel run</div>
       </div>
       <div class="shot">
-        <img src="img/s3sammy-4.jpg" alt="Detail shot" />
-        <div class="shot-overlay">
-          <span class="shot-tag">Details</span>
-          Badges · Wheels · Lines
-        </div>
+        <img src="img/portfolio4.png" alt="Portfolio 4" />
+        <div class="shot-overlay"><span class="shot-tag">Set 04</span> Garage light</div>
       </div>
       <div class="shot">
-        <img src="img/s3sammy-5.jpg" alt="Crew lineup" />
-        <div class="shot-overlay">
-          <span class="shot-tag">Crew</span>
-          Euro lineup · Meet vibes
-        </div>
+        <img src="img/portfolio5.png" alt="Portfolio 5" />
+        <div class="shot-overlay"><span class="shot-tag">Set 05</span> Detail focus</div>
       </div>
       <div class="shot">
-        <img src="img/s3sammy-6.jpg" alt="Rear lights" />
-        <div class="shot-overlay">
-          <span class="shot-tag">Moody</span>
-          Tails · Wet pavement
-        </div>
+        <img src="img/portfolio6.png" alt="Portfolio 6" />
+        <div class="shot-overlay"><span class="shot-tag">Set 06</span> Rolling shot</div>
+      </div>
+      <div class="shot">
+        <img src="img/portfolio7.png" alt="Portfolio 7" />
+        <div class="shot-overlay"><span class="shot-tag">Set 07</span> Static stance</div>
+      </div>
+      <div class="shot">
+        <img src="img/portfolio8.png" alt="Portfolio 8" />
+        <div class="shot-overlay"><span class="shot-tag">Set 08</span> Rooftop</div>
+      </div>
+      <div class="shot">
+        <img src="img/portfolio9.png" alt="Portfolio 9" />
+        <div class="shot-overlay"><span class="shot-tag">Set 09</span> Meets</div>
+      </div>
+      <div class="shot">
+        <img src="img/portfolio10.png" alt="Portfolio 10" />
+        <div class="shot-overlay"><span class="shot-tag">Set 10</span> Low light</div>
+      </div>
+      <div class="shot">
+        <img src="img/portfolio11.png" alt="Portfolio 11" />
+        <div class="shot-overlay"><span class="shot-tag">Set 11</span> Motion</div>
+      </div>
+      <div class="shot">
+        <img src="img/portfolio12.png" alt="Portfolio 12" />
+        <div class="shot-overlay"><span class="shot-tag">Set 12</span> Highlights</div>
       </div>
     </div>
   </section>
@@ -886,8 +876,7 @@
     <div class="section-label">Rates</div>
     <h2 class="section-title">Packages</h2>
     <p class="section-sub">
-      Straightforward options for enthusiasts, clubs, and brands.
-      Adjust as demand grows — the structure stays clean.
+      Straightforward options for enthusiasts, clubs, and brands. Adjust as demand grows.
     </p>
     <div class="pricing-grid">
       <div class="price-card">
@@ -902,7 +891,6 @@
           <li>3–5 day delivery</li>
         </ul>
       </div>
-
       <div class="price-card">
         <div class="badge-popular">Most booked</div>
         <div class="price-label">Signature</div>
@@ -917,7 +905,6 @@
           <li>Rolling shots (where safe)</li>
         </ul>
       </div>
-
       <div class="price-card">
         <div class="price-label">Premium</div>
         <div class="price-name">Crew / Brand / Event</div>
@@ -940,27 +927,14 @@
     <p class="section-sub">
       Share your car, location, and vibe — get a fast reply with availability and a plan.
     </p>
-
     <div class="contact-wrap">
       <div class="contact-card">
-        <p>
-          <strong>Booking:</strong>
-          <a href="mailto:info@s3sammy.com">info@s3sammy.com</a> (update to his real email).
-        </p>
-        <p>
-          <strong>Location:</strong> Montreal & surrounding areas. Travel on request.
-        </p>
-        <p>
-          <strong>Delivery:</strong> 3–7 days. Rush available.</p>
-        <p>
-          <strong>Instagram:</strong>
-          <a href="https://www.instagram.com/s3.sammy" target="_blank">@s3.sammy</a>
-        </p>
-        <p class="contact-note">
-          A small deposit or confirmation may be required to lock in your date.
-        </p>
+        <p><strong>Booking:</strong> <a href="mailto:info@s3sammy.com">info@s3sammy.com</a></p>
+        <p><strong>Location:</strong> Montreal & surrounding areas. Travel on request.</p>
+        <p><strong>Delivery:</strong> 3–7 days. Rush available.</p>
+        <p><strong>Instagram:</strong> <a href="https://www.instagram.com/s3.sammy" target="_blank">@s3.sammy</a></p>
+        <p class="contact-note">A small deposit may be required to lock in your date.</p>
       </div>
-
       <form action="mailto:info@s3sammy.com" method="post" enctype="text/plain">
         <div>
           <label for="name">Name</label>
@@ -984,7 +958,7 @@
         </div>
         <button type="submit" class="btn-drive">Send Inquiry <span class="arrow">↗</span></button>
         <div class="contact-note">
-          You can swap this mailto for a proper form backend later for smoother submissions.
+          You can replace this mailto with a proper form service later.
         </div>
       </form>
     </div>
@@ -996,7 +970,6 @@
   <div>Site by CTRL & Create.</div>
 </footer>
 
-<!-- Lightbox -->
 <div id="lightbox" style="
   position: fixed;
   inset: 0;
@@ -1015,7 +988,6 @@
 </div>
 
 <script>
-  // Year
   document.getElementById('year').textContent = new Date().getFullYear();
 
   const scrollCar = document.getElementById('scrollCar');
@@ -1032,7 +1004,6 @@
         currentId = section.id || '';
       }
     });
-
     navLinks.forEach(link => {
       const href = link.getAttribute('href');
       const targetId = href && href.startsWith('#') ? href.substring(1) : '';
@@ -1052,7 +1023,6 @@
 
     const progress = Math.min(Math.max(scrollTop / scrollHeight, 0), 1);
 
-    // Scroll track car + fill
     if (scrollCar && scrollLineFill) {
       const line = scrollCar.parentElement;
       const lineHeight = line.offsetHeight;
@@ -1062,7 +1032,6 @@
       scrollLineFill.style.height = (progress * 100) + '%';
     }
 
-    // Hero car horizontal drive
     if (carFloat) {
       const driveOffset = progress * 60;
       carFloat.style.setProperty('--drive-offset', driveOffset + 'px');
@@ -1071,7 +1040,6 @@
     updateActiveLink();
   }
 
-  // Lightbox
   const lightbox = document.getElementById('lightbox');
   const lightboxImg = document.getElementById('lightbox-img');
 
