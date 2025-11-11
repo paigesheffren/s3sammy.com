@@ -138,7 +138,7 @@
       transform: translateY(-1px);
     }
 
-    /* INTRO HERO (FULLSCREEN) */
+    /* INTRO HERO */
     .intro-hero {
       min-height: 100vh;
       padding: 90px 22px 40px 22px;
@@ -209,7 +209,7 @@
     .intro-visual {
       display: flex;
       flex-direction: column;
-      align-items: flex-end; /* push towards scroll line */
+      align-items: flex-end;
       gap: 10px;
       position: relative;
     }
@@ -229,7 +229,7 @@
     }
 
     .car-float {
-      --drive-offset: 0px; /* updated by JS */
+      --drive-offset: 0px;
       animation: floatCar 3.5s ease-in-out infinite alternate;
       transform-origin: center;
     }
@@ -261,7 +261,7 @@
       letter-spacing: 0.16em;
     }
 
-    /* SCROLL TRACK (RIGHT SIDE) */
+    /* SCROLL TRACK */
     .scroll-track {
       position: fixed;
       top: 80px;
@@ -316,7 +316,7 @@
       opacity: 0.94;
     }
 
-    /* MAIN CONTENT */
+    /* MAIN */
     main {
       max-width: 1200px;
       margin: 0 auto;
@@ -351,7 +351,7 @@
       margin-bottom: 26px;
     }
 
-    /* ABOUT / HERO DETAILS */
+    /* ABOUT */
     .hero-details {
       display: grid;
       grid-template-columns: minmax(0, 3fr) minmax(260px, 2.5fr);
@@ -451,8 +451,8 @@
     /* PORTFOLIO */
     .portfolio-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-      gap: 10px;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 12px;
     }
 
     .shot {
@@ -461,7 +461,7 @@
       overflow: hidden;
       background: #101318;
       border: 1px solid rgba(255,255,255,0.06);
-      min-height: 150px;
+      aspect-ratio: 16 / 9;           /* uniform frame for all images */
       cursor: pointer;
       transition: all var(--transition-fast);
     }
@@ -469,7 +469,7 @@
     .shot img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: cover;               /* crops to fit cleanly */
       display: block;
       filter: saturate(1.06) contrast(1.05);
       transition: all var(--transition-fast);
@@ -740,7 +740,6 @@
   </div>
 </header>
 
-<!-- Scroll track with car following scroll -->
 <div class="scroll-track">
   <div class="scroll-line">
     <div class="scroll-line-fill" id="scrollLineFill"></div>
@@ -748,7 +747,6 @@
   </div>
 </div>
 
-<!-- Minimal intro hero -->
 <section class="intro-hero" id="top">
   <div>
     <h1 class="intro-title">S3 SAMMY</h1>
@@ -790,8 +788,7 @@
   <div class="intro-visual">
     <div class="car-top-wrap">
       <div class="car-float">
-        <!-- Uses s3-top.png from repo root -->
-        <img src="img/s3-top.png" alt="Audi S3 District Green by S3 Sammy" />
+        <img src="s3-top.png" alt="Audi S3 District Green by S3 Sammy" />
       </div>
     </div>
     <div class="intro-label">Audi S3 · District Green · Montreal</div>
@@ -799,7 +796,6 @@
 </section>
 
 <main>
-  <!-- ABOUT / HERO DETAILS -->
   <section class="content-block" id="about">
     <div class="section-label">About</div>
     <h2 class="section-title">Cinematic performance car visuals.</h2>
@@ -833,99 +829,59 @@
     </div>
   </section>
 
-  <!-- PORTFOLIO -->
   <section class="content-block" id="portfolio">
     <div class="section-label">Selected Work</div>
     <h2 class="section-title">Portfolio</h2>
+    <p class="section-sub">
+      Replace these placeholders with real sets from <strong>@s3.sammy</strong>:
+      tunnels, rooftops, garages, meets, rolling shots, and details in his signature mood.
+    </p>
     <div class="portfolio-grid">
       <div class="shot">
-        <img src="img/portfolio1.png" alt="Audi S3 night tunnel" />
+        <img src="img/s3sammy-1.jpg" alt="Audi S3 night tunnel" />
         <div class="shot-overlay">
           <span class="shot-tag">Night</span>
           Tunnel · High contrast · Clean stance
         </div>
       </div>
       <div class="shot">
-        <img src="img/portfolio2.png" alt="Rolling Audi S3" />
+        <img src="img/s3sammy-2.jpg" alt="Rolling Audi S3" />
         <div class="shot-overlay">
           <span class="shot-tag">Rolling</span>
           Street run · Motion blur
         </div>
       </div>
       <div class="shot">
-        <img src="img/portfolio3.png" alt="Garage shoot" />
+        <img src="img/s3sammy-3.jpg" alt="Garage shoot" />
         <div class="shot-overlay">
           <span class="shot-tag">Garage</span>
           Low light · Green cast
         </div>
       </div>
       <div class="shot">
-        <img src="img/portfolio4.png" alt="Detail shot" />
+        <img src="img/s3sammy-4.jpg" alt="Detail shot" />
         <div class="shot-overlay">
           <span class="shot-tag">Details</span>
           Badges · Wheels · Lines
         </div>
       </div>
       <div class="shot">
-        <img src="img/portfolio5.png" alt="Crew lineup" />
+        <img src="img/s3sammy-5.jpg" alt="Crew lineup" />
         <div class="shot-overlay">
           <span class="shot-tag">Crew</span>
           Euro lineup · Meet vibes
         </div>
       </div>
       <div class="shot">
-        <img src="img/portfolio6.png" alt="Rear lights" />
+        <img src="img/s3sammy-6.jpg" alt="Rear lights" />
         <div class="shot-overlay">
           <span class="shot-tag">Moody</span>
           Tails · Wet pavement
         </div>
       </div>
     </div>
-          <div class="shot">
-        <img src="img/portfolio7.png" alt="Crew lineup" />
-        <div class="shot-overlay">
-          <span class="shot-tag">Crew</span>
-          Euro lineup · Meet vibes
-        </div>
-      </div>
-          <div class="shot">
-        <img src="img/portfolio8.png" alt="Crew lineup" />
-        <div class="shot-overlay">
-          <span class="shot-tag">Crew</span>
-          Euro lineup · Meet vibes
-        </div>
-      </div>
-          <div class="shot">
-        <img src="img/portfolio9.png" alt="Crew lineup" />
-        <div class="shot-overlay">
-          <span class="shot-tag">Crew</span>
-          Euro lineup · Meet vibes
-        </div>
-      </div>
-          <div class="shot">
-        <img src="img/portfolio10.png" alt="Crew lineup" />
-        <div class="shot-overlay">
-          <span class="shot-tag">Crew</span>
-          Euro lineup · Meet vibes
-        </div>
-      </div>
-          <div class="shot">
-        <img src="img/portfolio11.png" alt="Crew lineup" />
-        <div class="shot-overlay">
-          <span class="shot-tag">Crew</span>
-          Euro lineup · Meet vibes
-        </div>
-      </div>
-          <div class="shot">
-        <img src="img/portfolio12.png" alt="Crew lineup" />
-        <div class="shot-overlay">
-          <span class="shot-tag">Crew</span>
-          Euro lineup · Meet vibes
-        </div>
-      </div>
   </section>
 
-  <!-- PRICING -->
   <section class="content-block" id="pricing">
     <div class="section-label">Rates</div>
     <h2 class="section-title">Packages</h2>
@@ -978,7 +934,6 @@
     </div>
   </section>
 
-  <!-- CONTACT -->
   <section class="content-block" id="contact">
     <div class="section-label">Book a Shoot</div>
     <h2 class="section-title">Contact</h2>
@@ -996,8 +951,7 @@
           <strong>Location:</strong> Montreal & surrounding areas. Travel on request.
         </p>
         <p>
-          <strong>Delivery:</strong> 3–7 days. Rush available.
-        </p>
+          <strong>Delivery:</strong> 3–7 days. Rush available.</p>
         <p>
           <strong>Instagram:</strong>
           <a href="https://www.instagram.com/s3.sammy" target="_blank">@s3.sammy</a>
@@ -1042,7 +996,7 @@
   <div>Site by CTRL & Create.</div>
 </footer>
 
-<!-- Lightbox for portfolio -->
+<!-- Lightbox -->
 <div id="lightbox" style="
   position: fixed;
   inset: 0;
@@ -1098,27 +1052,26 @@
 
     const progress = Math.min(Math.max(scrollTop / scrollHeight, 0), 1);
 
-    // Right-side vertical car + line fill
+    // Scroll track car + fill
     if (scrollCar && scrollLineFill) {
       const line = scrollCar.parentElement;
       const lineHeight = line.offsetHeight;
       const carHeight = scrollCar.offsetHeight;
       const y = (lineHeight - carHeight) * progress;
-
       scrollCar.style.top = y + 'px';
       scrollLineFill.style.height = (progress * 100) + '%';
     }
 
-    // Hero car: drive horizontally using same scroll progress
+    // Hero car horizontal drive
     if (carFloat) {
-      const driveOffset = progress * 60; // adjust for more/less movement
+      const driveOffset = progress * 60;
       carFloat.style.setProperty('--drive-offset', driveOffset + 'px');
     }
 
     updateActiveLink();
   }
 
-  // Simple portfolio lightbox
+  // Lightbox
   const lightbox = document.getElementById('lightbox');
   const lightboxImg = document.getElementById('lightbox-img');
 
