@@ -6,20 +6,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="S3 Sammy - Montreal-based automotive photographer specializing in Audi, performance, and night shoots." />
   <style>
-    :root {
-      --bg-dark: #050708;
-      --bg-elevated: #0b1014;
-      /* Darker green tones */
-      --accent-green: #1c945b;
-      --accent-soft: #166440;
-      --text-main: #f9fafb;
-      --text-muted: #c5ccd5;
-      --border-subtle: rgba(255,255,255,0.14);
-      --radius-xl: 18px;
-      --transition-fast: 0.25s ease;
-      --shadow-soft: 0 18px 55px rgba(0,0,0,0.7);
-      --font-main: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
-    }
+   :root {
+  --bg-dark: #050708;
+  --bg-elevated: #0b1014;
+
+  /* Darker, richer green */
+  --accent-green: #0f7a47;
+  --accent-soft: #0c5a34;
+
+  --text-main: #f9fafb;
+  --text-muted: #c5ccd5;
+  --border-subtle: rgba(255,255,255,0.14);
+  --radius-xl: 18px;
+  --transition-fast: 0.25s ease;
+  --shadow-soft: 0 18px 55px rgba(0,0,0,0.7);
+
+  --font-main: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+}
+
 
     * {
       box-sizing: border-box;
@@ -77,7 +81,7 @@
     }
 
     .logo span.main {
-      font-size: 20px;
+      font-size: 22px;
       font-weight: 800;
       letter-spacing: 0.16em;
       color: var(--accent-green);
@@ -85,7 +89,7 @@
     }
 
     .logo span.sub {
-      font-size: 11px;
+      font-size: 12px;
       letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--text-muted);
@@ -95,7 +99,7 @@
       list-style: none;
       display: flex;
       gap: 18px;
-      font-size: 13px;
+      font-size: 14px;
       text-transform: uppercase;
       letter-spacing: 0.13em;
     }
@@ -122,7 +126,7 @@
       padding: 6px 14px;
       border-radius: 999px;
       border: 1px solid var(--accent-green);
-      font-size: 11px;
+      font-size: 12px;
       text-transform: uppercase;
       letter-spacing: 0.16em;
       color: var(--accent-green);
@@ -164,7 +168,7 @@
     }
 
     .intro-sub {
-      font-size: 16px;
+      font-size: 18px;
       color: var(--text-muted);
       max-width: 420px;
       margin-bottom: 18px;
@@ -179,7 +183,7 @@
       border: none;
       background: linear-gradient(135deg, var(--accent-green), var(--accent-soft));
       color: #050708;
-      font-size: 13px;
+      font-size: 15px;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.2em;
@@ -189,7 +193,7 @@
     }
 
     .btn-drive span.arrow {
-      font-size: 16px;
+      font-size: 18px;
       transform: translateY(1px);
     }
 
@@ -199,7 +203,7 @@
     }
 
     .intro-note {
-      font-size: 11px;
+      font-size: 13px;
       color: var(--text-muted);
       margin-top: 10px;
       text-transform: uppercase;
@@ -251,7 +255,7 @@
     }
 
     .intro-label {
-      font-size: 11px;
+      font-size: 13px;
       color: var(--accent-green);
       text-transform: uppercase;
       letter-spacing: 0.16em;
@@ -324,7 +328,7 @@
     section.content-block { margin-bottom: 90px; }
 
     .section-label {
-      font-size: 12px;
+      font-size: 14px;
       text-transform: uppercase;
       letter-spacing: 0.2em;
       color: var(--accent-green);
@@ -332,14 +336,14 @@
     }
 
     .section-title {
-      font-size: 30px;
+      font-size: 32px;
       font-weight: 600;
       margin-bottom: 10px;
       color: var(--text-main);
     }
 
     .section-sub {
-      font-size: 16px;
+      font-size: 18px;
       color: var(--text-muted);
       max-width: 620px;
       margin-bottom: 26px;
@@ -354,7 +358,7 @@
     }
 
     .hero-text {
-      font-size: 16px;
+      font-size: 18px;
       color: var(--text-muted);
       margin-bottom: 18px;
     }
@@ -369,7 +373,7 @@
       padding: 5px 11px;
       border-radius: 999px;
       border: 1px solid rgba(255,255,255,0.16);
-      font-size: 12px;
+      font-size: 14px;
       color: var(--text-main);
       background: rgba(5,7,8,0.96);
       backdrop-filter: blur(12px);
@@ -386,7 +390,7 @@
     }
 
     .hero-car-label {
-      font-size: 11px;
+      font-size: 13px;
       text-transform: uppercase;
       letter-spacing: 0.16em;
       color: var(--accent-green);
@@ -394,19 +398,19 @@
     }
 
     .hero-location {
-      font-size: 13px;
+      font-size: 15px;
       color: var(--text-muted);
       margin-bottom: 10px;
     }
 
     .hero-main-text {
-      font-size: 14px;
+      font-size: 16px;
       color: var(--text-main);
       margin-bottom: 10px;
     }
 
     .hero-mini {
-      font-size: 11px;
+      font-size: 13px;
       color: var(--text-muted);
       display: flex;
       justify-content: space-between;
@@ -477,7 +481,7 @@
       display: flex;
       align-items: flex-end;
       padding: 10px;
-      font-size: 11px;
+      font-size: 13px;
       color: var(--text-main);
       gap: 4px;
       transition: opacity var(--transition-fast), transform var(--transition-fast);
@@ -487,7 +491,7 @@
 
     .shot-tag {
       padding: 2px 7px;
-      font-size: 10px;
+      font-size: 12px;
       border-radius: 999px;
       border: 1px solid rgba(255,255,255,0.2);
       background: rgba(5,7,8,0.98);
@@ -536,7 +540,7 @@
     }
 
     .price-label {
-      font-size: 11px;
+      font-size: 13px;
       text-transform: uppercase;
       letter-spacing: 0.16em;
       color: var(--accent-green);
@@ -544,27 +548,27 @@
     }
 
     .price-name {
-      font-size: 18px;
+      font-size: 20px;
       margin-bottom: 6px;
       color: var(--text-main);
     }
 
     .price-amount {
-      font-size: 20px;
+      font-size: 22px;
       font-weight: 500;
       margin-bottom: 4px;
       color: var(--accent-green);
     }
 
     .price-sub {
-      font-size: 12px;
+      font-size: 14px;
       color: var(--text-muted);
       margin-bottom: 10px;
     }
 
     .price-list {
       list-style: none;
-      font-size: 13px;
+      font-size: 15px;
       color: var(--text-main);
     }
 
@@ -577,7 +581,7 @@
     .price-list li::before {
       content: "▹";
       color: var(--accent-green);
-      font-size: 11px;
+      font-size: 13px;
       margin-top: 2px;
     }
 
@@ -585,7 +589,7 @@
       position: absolute;
       top: 9px;
       right: 10px;
-      font-size: 10px;
+      font-size: 12px;
       padding: 2px 7px;
       border-radius: 999px;
       background: var(--accent-green);
@@ -602,7 +606,7 @@
     }
 
     .contact-note {
-      font-size: 11px;
+      font-size: 13px;
       color: var(--text-muted);
       margin-top: 3px;
     }
@@ -612,7 +616,7 @@
       max-width: 1200px;
       margin: 0 auto;
       padding: 0 22px 26px 22px;
-      font-size: 11px;
+      font-size: 13px;
       color: var(--text-muted);
       display: flex;
       justify-content: space-between;
@@ -636,7 +640,7 @@
       }
       nav ul { display: none; }
       .nav-cta {
-        font-size: 10px;
+        font-size: 12px;
         padding: 5px 10px;
       }
       .hero-details {
