@@ -597,7 +597,79 @@
       text-transform: uppercase;
       letter-spacing: 0.14em;
     }
+    
+/* SWIPE THROUGH SHOOT */
+.swipe-wrap {
+  margin-top: 8px;
+}
 
+.swipe-hint {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+}
+
+.swipe-track {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  padding-bottom: 6px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.swipe-track::-webkit-scrollbar {
+  height: 5px;
+}
+
+.swipe-track::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.18);
+  border-radius: 999px;
+}
+
+.swipe-card {
+  min-width: 260px;
+  max-width: 310px;
+  flex-shrink: 0;
+  scroll-snap-align: start;
+  background: var(--bg-elevated);
+  border-radius: var(--radius-xl);
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 16px 14px;
+  box-shadow: var(--shadow-soft);
+  transition:
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast),
+    border-color var(--transition-fast);
+}
+
+.swipe-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent-green);
+  box-shadow: 0 22px 60px rgba(0,0,0,0.9);
+}
+
+.swipe-step {
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent-green);
+  margin-bottom: 4px;
+}
+
+.swipe-title {
+  font-size: 16px;
+  margin-bottom: 6px;
+  color: var(--text-main);
+}
+
+.swipe-text {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+
+    
     /* CONTACT (new DM block) */
     .contact-center {
       display: flex;
@@ -835,54 +907,59 @@
     </div>
   </section>
 
-  <section class="content-block" id="pricing">
-    <div class="section-label">Rates</div>
-    <h2 class="section-title">Packages</h2>
+    <section class="content-block" id="pricing">
+    <div class="section-label">The Experience</div>
+    <h2 class="section-title">Swipe Through the Shoot</h2>
     <p class="section-sub">
-      Straightforward options for enthusiasts, clubs, and brands. Adjust as demand grows.
+      Here’s what it’s like to shoot with S3 Sammy — from the first DM to getting your final photos ready to post.
     </p>
-    <div class="pricing-grid">
-      <div class="price-card">
-        <div class="price-label">Entry</div>
-        <div class="price-name">Street Session</div>
-        <div class="price-amount">$120</div>
-        <div class="price-sub">Clean, fast, perfect for socials.</div>
-        <ul class="price-list">
-          <li>Up to 30 minutes</li>
-          <li>1 location</li>
-          <li>8 fully edited photos</li>
-          <li>3–5 day delivery</li>
-        </ul>
-      </div>
-      <div class="price-card">
-        <div class="badge-popular">Most booked</div>
-        <div class="price-label">Signature</div>
-        <div class="price-name">Full Feature Shoot</div>
-        <div class="price-amount">$220</div>
-        <div class="price-sub">The full story of your car.</div>
-        <ul class="price-list">
-          <li>60–75 minutes</li>
-          <li>2–3 locations</li>
-          <li>18 fully edited photos</li>
-          <li>Social + print-ready files</li>
-          <li>Rolling shots (where safe)</li>
-        </ul>
-      </div>
-      <div class="price-card">
-        <div class="price-label">Premium</div>
-        <div class="price-name">Crew / Brand / Event</div>
-        <div class="price-amount">From $350</div>
-        <div class="price-sub">For shops, crews & launches.</div>
-        <ul class="price-list">
-          <li>Custom duration & locations</li>
-          <li>Multi-car & group coverage</li>
-          <li>30+ edited images</li>
-          <li>Licensing for brands</li>
-          <li>Reels / video add-ons</li>
-        </ul>
+
+    <div class="swipe-wrap">
+      <div class="swipe-hint">Swipe to see each step →</div>
+      <div class="swipe-track">
+        <article class="swipe-card">
+          <div class="swipe-step">01 · Book</div>
+          <h3 class="swipe-title">DM & Lock It In</h3>
+          <p class="swipe-text">
+            You hit me up on Instagram with your car, a few inspo pics, and when you’re free. We figure out the vibe, timing, and general area that fits your build.
+          </p>
+        </article>
+
+        <article class="swipe-card">
+          <div class="swipe-step">02 · Plan</div>
+          <h3 class="swipe-title">Vibe & Locations</h3>
+          <p class="swipe-text">
+            We pick a route or a couple of spots — tunnels, rooftops, streets, or garages — and plan the kind of shots you want: rollers, statics, detail shots, or a mix.
+          </p>
+        </article>
+
+        <article class="swipe-card">
+          <div class="swipe-step">03 · Shoot</div>
+          <h3 class="swipe-title">Chill, Shoot, Drive</h3>
+          <p class="swipe-text">
+            On shoot day, it’s laid-back and fun. We talk cars, move around a bit, grab different angles, and I guide you through everything so it never feels awkward.
+          </p>
+        </article>
+
+        <article class="swipe-card">
+          <div class="swipe-step">04 · Edit</div>
+          <h3 class="swipe-title">Turn Shots Into Visuals</h3>
+          <p class="swipe-text">
+            After the shoot, I go through the photos, pick the best ones, and fully edit them — clean colors, sharp details, and that moody, cinematic look.
+          </p>
+        </article>
+
+        <article class="swipe-card">
+          <div class="swipe-step">05 · Deliver</div>
+          <h3 class="swipe-title">Ready to Post</h3>
+          <p class="swipe-text">
+            You get a gallery of high-quality files, sized for socials and screens. You post, tag, and enjoy — photos that feel as good as the car drives.
+          </p>
+        </article>
       </div>
     </div>
   </section>
+
 
   <!-- New contact / DM section -->
   <section class="content-block" id="contact">
